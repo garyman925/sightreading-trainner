@@ -62,8 +62,9 @@
     $('reveal-column').textContent=columnAnswer?'隱藏音名':'顯示音名';
     if(!running)window.SRNotation.cursor($('score'),b,true);
   }
+  const compactScore=()=>window.matchMedia?.('(max-width: 620px)').matches??false;
   function renderScore(){
-    $('score').innerHTML=window.SRNotation.render(exercise(),{labels:$('note-labels').checked,guide:$('guide').checked});
+    $('score').innerHTML=window.SRNotation.render(exercise(),{labels:$('note-labels').checked,guide:$('guide').checked,compact:compactScore()});
     if(mode==='vertical')renderColumn();
   }
   function renderExercise(){
@@ -90,7 +91,7 @@
     document.querySelectorAll('[data-mode]').forEach(el=>{el.classList.toggle('active',el.dataset.mode===mode);el.setAttribute('aria-current',el.dataset.mode===mode?'page':'false');});
     if(mode==='records'){renderRecords();return;}
     const data=MODES[mode];
-    $('mode-title').textContent=data.title;$('mode-description').textContent=data.description;
+    $('mode-title').textContent=data.name;$('mode-description').textContent=data.description;
     $('method-title').textContent=data.method;
     $('method-steps').innerHTML=data.steps.map(s=>`<li>${esc(s)}</li>`).join('');
     $('practice-note').textContent=data.note;
@@ -161,7 +162,7 @@
     window.SRNotation.preview($('score'),elapsedBeat,$('read-ahead-toggle').checked);
     const guideBeat=Math.floor(elapsedBeat*2)/2;
     window.SRNotation.cursor($('score'),guideBeat,elapsedBeat>=0&&($('guide').checked||mode==='vertical'));
-    if(elapsedBeat>=0&&$('guide').checked){
+    if(elapsedBeat>=0&&$('guide').checked&&!compactScore()){
       const wrapper=$('score-scroll'), targetX=window.SRNotation.beatX(guideBeat)*$('score').clientWidth/window.SRNotation.width;
       if(targetX-wrapper.scrollLeft>wrapper.clientWidth-55)wrapper.scrollLeft=targetX-wrapper.clientWidth*.35;
     }
@@ -309,7 +310,7 @@
   });
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&running){stop('已暫停離開頁面的播放；回來後重新開始。');notify('頁面已離開前景，播放停止；這一遍未儲存。');}});
   $('reveal-column').addEventListener('click',()=>{columnAnswer=!columnAnswer;renderColumn();});
-  $('next-column').addEventListener('click',()=>{columnIndex++;columnAnswer=false;renderColumn();const b=attackColumns()[columnIndex];const wrapper=$('score-scroll');wrapper.scrollLeft=Math.max(0,window.SRNotation.beatX(b)*$('score').clientWidth/window.SRNotation.width-wrapper.clientWidth/2);});
+  $('next-column').addEventListener('click',()=>{columnIndex++;columnAnswer=false;renderColumn();const b=attackColumns()[columnIndex];const wrapper=$('score-scroll');wrapper.scrollLeft=compactScore()?0:Math.max(0,window.SRNotation.beatX(b)*$('score').clientWidth/window.SRNotation.width-wrapper.clientWidth/2);});
   $('ladder-target').addEventListener('change',()=>{const v=Number($('ladder-target').value);target=clamp(Number.isFinite(v)?Math.round(v):80,30,160);$('ladder-target').value=target;streak=0;if(bpm>target)setBpm(target,false);renderLadder();});
   $('ladder-step').addEventListener('change',()=>{step=Number($('ladder-step').value);streak=0;renderLadder();});
   $('reset-ladder').addEventListener('click',()=>{streak=0;renderLadder();notify('本級進度已重設，已儲存的紀錄會保留。');});
@@ -321,6 +322,7 @@
   ['help-open','quick-help'].forEach(id=>$(id).addEventListener('click',help));
   ['help-close','help-ready'].forEach(id=>$(id).addEventListener('click',()=>$('help-dialog').close()));
   $('help-dialog').addEventListener('click',e=>{if(e.target===$('help-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
+  window.matchMedia?.('(max-width: 620px)').addEventListener('change',()=>{if(mode!=='records'){renderScore();if(running){const beat=(ctx.currentTime-startTime)*bpm/60;window.SRNotation.cursor($('score'),Math.floor(beat*2)/2,beat>=0&&($('guide').checked||mode==='vertical'));window.SRNotation.preview($('score'),beat,$('read-ahead-toggle').checked);}}});
   switchMode('rhythm');
   if(!storageAvailable)notify('未能讀取本機紀錄。你仍可練習，並匯出 CSV 保留結果。');
 })();

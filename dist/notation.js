@@ -13,7 +13,7 @@
     if(d===.5) return `<circle cx="${x-3}" cy="${y-5}" r="3.1" fill="currentColor"/><path d="M${x-5},${y-4} Q${x+1},${y+1} ${x+6},${y-9} L${x},${y+13}" fill="none" stroke="currentColor" stroke-width="1.9"/>`;
     return `<path d="M${x-3},${y-14} l7,9 -6,8 6,8 q-10,-7 -8,5 q-8,-9 2,-12 l-7,-8 8,-7 z" fill="currentColor"/>${d===1.5?`<circle cx="${x+11}" cy="${y-1}" r="1.8"/>`:''}`;
   }
-  function render(ex,{labels=false,guide=true,selected=null}={}) {
+  function render(ex,{labels=false,guide=true,selected=null,compact=false}={}) {
     const out=[`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(ex.title)}，四小節大譜表，上方右手、下方左手，${esc(ex.key)} 調" xmlns="http://www.w3.org/2000/svg">`];
     out.push(`<title>${esc(ex.title)} — 雙手對齊的大譜表</title><rect width="${W}" height="${H}" fill="#fff"/>`);
     out.push('<defs><filter id="read-glow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#e5a52c" flood-opacity=".85"/></filter></defs><g id="read-ahead" visibility="hidden" pointer-events="none"><rect x="314" y="36" width="198" height="262" rx="9" fill="#fff0bd" fill-opacity=".55" stroke="#d8a03d" stroke-width="1.5" filter="url(#read-glow)"/><text x="413" y="20" text-anchor="middle" font-size="12" fill="#8a5a12" font-family="sans-serif">預讀第 2 小節</text></g>');
@@ -89,7 +89,11 @@
       }
     }
     out.push('</svg>');
-    return out.join('');
+    const full=out.join('');
+    if(!compact)return full;
+    const body=full.slice(full.indexOf('>')+1,full.lastIndexOf('</svg>'));
+    return '<svg class="compact-score" viewBox="0 0 530 650" role="img" aria-label="'+esc(ex.title)+'，每行兩小節，上下兩行大譜表" xmlns="http://www.w3.org/2000/svg"><defs><g id="compact-source">'+body+'</g></defs><svg x="0" y="0" width="512" height="325" viewBox="0 0 512 325" overflow="hidden"><use href="#compact-source"/></svg><line x1="512" y1="70" x2="512" y2="250" stroke="#83959c" stroke-width="1"/><svg x="0" y="325" width="116" height="325" viewBox="0 0 116 325" overflow="hidden"><use href="#compact-source"/></svg><svg x="116" y="325" width="414" height="325" viewBox="512 0 414 325" overflow="hidden"><use href="#compact-source"/></svg></svg>';
+
   }
   function cursor(container,beat,visible=true){
     const g=container.querySelector('#score-cursor');
