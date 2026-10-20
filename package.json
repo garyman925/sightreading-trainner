@@ -1,0 +1,11 @@
+{
+  "name": "hepai-sightreading-trainer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Traditional Chinese piano sight-reading and coordination trainer",
+  "scripts": {
+    "start": "node preview.cjs dist",
+    "test": "node tests/check-trainer.cjs && node tests/test-flow.cjs && node tests/test-read-ahead.cjs"
+  },
+  "engines": { "node": ">=18" }
+}
