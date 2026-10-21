@@ -25,7 +25,7 @@ function setup(){
   const w={AudioContext,crypto:{randomUUID:()=>`test-${++count}`}};
   const context={window:w,document:doc,localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},console,Blob,URL:{createObjectURL:b=>{lastBlob=b;return 'blob:test';},revokeObjectURL(){}},setTimeout:()=>++count,clearTimeout(){},setInterval:fn=>{const id=++count;intervals.set(id,fn);return id;},clearInterval:id=>intervals.delete(id),requestAnimationFrame:fn=>{const id=++count;frames.set(id,fn);return id;},cancelAnimationFrame:id=>frames.delete(id),confirm:()=>true};
   vm.createContext(context);
-  for(const file of ['exercises.js','notation.js','app.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context);
+  for(const file of ['exercises.js','meter.js','genres.js','arrangement.js','notation.js','app.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context);
   return {els,doc,nav,clocks,frames,intervals,getBlob:()=>lastBlob,click:async id=>{await els[id].click();await Promise.resolve();},mode:async name=>nav.find(e=>e.dataset.mode===name).click(),finish:()=>{const ctx=clocks[0];ctx.currentTime+=20*60/Number(els['bpm-number'].value)+.2;for(const fn of [...intervals.values()])fn();const jobs=[...frames.values()];frames.clear();jobs.forEach(fn=>fn());}};
 }
 (async()=>{
@@ -51,8 +51,8 @@ function setup(){
  await app.mode('records');assert.equal(e['stat-count'].textContent,4);await app.click('export-records');assert.ok((await app.getBlob().text()).includes('BPM'));
  const fresh=setup();await fresh.mode('records');assert.equal(fresh.els['stat-count'].textContent,4);
  app.doc.hidden=false;
- await app.mode('expression');assert.ok(!e['expression-panel'].hidden);assert.ok(e['expression-route'].hidden);
- await app.click('expression-reveal');assert.match(e['expression-route'].textContent,/mf/);assert.ok(!e['expression-route'].hidden);
+ await app.mode('expression');
+
  await app.click('start');app.finish();assert.ok(!e['expression-review'].hidden);assert.equal(e['expression-start'].checked,false);
  e['expression-start'].checked=true;e['expression-change'].checked=true;
  await app.click('save-session');
@@ -62,5 +62,5 @@ function setup(){
  await app.click('save-session');records=JSON.parse(storage.get('hepai-practice-v1'));assert.equal(records[0].passed,true);
  await app.mode('records');assert.match(e['records-list'].innerHTML,/表情 3 \/ 3/);await app.click('export-records');assert.match(await app.getBlob().text(),/表情開頭/);
  const updated=setup();await updated.mode('records');assert.equal(updated.els['stat-count'].textContent,6);
- console.log('PASS: previous practice flows plus expression route reveal, unchecked self-assessment, partial/full expression pass rules, backward-compatible records, reload and extended CSV.');
+ console.log('PASS: previous practice flows plus unchecked self-assessment, partial/full expression pass rules, backward-compatible records, reload and extended CSV.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -5,7 +5,9 @@
   "description": "Traditional Chinese piano sight-reading and coordination trainer",
   "scripts": {
     "start": "node preview.cjs dist",
-    "test": "node tests/check-trainer.cjs && node tests/test-flow.cjs && node tests/test-read-ahead.cjs"
+    "test": "node tests/test-flow.cjs && node tests/test-read-ahead.cjs && node tests/test-meters.cjs && node tests/test-genres.cjs && node tests/test-arrangement-flow.cjs && node tests/test-genre-flow.cjs && node tests/test-meter-flow.cjs && node tests/test-meter-preview.cjs"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  }
 }

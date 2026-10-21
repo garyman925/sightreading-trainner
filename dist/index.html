@@ -13,69 +13,67 @@
     <aside class="sidebar">
       <a href="#" class="brand" aria-label="合拍首頁"><span class="brandmark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>合拍<small>鋼琴視奏練習室</small></span></a>
       <nav aria-label="練習項目">
-        <button data-mode="rhythm" class="nav-button active"><span class="nav-icon">⠿</span><span>節奏<small>把每一拍對齊</small></span></button>
-        <button data-mode="vertical" class="nav-button"><span class="nav-icon">↕</span><span>讀譜<small>一次看見兩隻手</small></span></button>
-        <button data-mode="ladder" class="nav-button"><span class="nav-icon">▥</span><span>速度<small>穩定，再快一點</small></span></button>
-        <button data-mode="expression" class="nav-button"><span class="nav-icon"><i>ƒ</i></span><span>表情<small>看見，也彈出來</small></span></button>
-        <button data-mode="records" class="nav-button"><span class="nav-icon">▤</span><span>紀錄<small>看見自己的進步</small></span></button>
+        <button data-mode="rhythm" class="nav-button active"><span class="nav-icon">⠿</span><span>節奏</span></button>
+        <button data-mode="vertical" class="nav-button"><span class="nav-icon">↕</span><span>讀譜</span></button>
+        <button data-mode="ladder" class="nav-button"><span class="nav-icon">▥</span><span>速度</span></button>
+        <button data-mode="expression" class="nav-button"><span class="nav-icon"><i>ƒ</i></span><span>表情</span></button>
+        <button data-mode="records" class="nav-button"><span class="nav-icon">▤</span><span>紀錄</span></button>
       </nav>
-      <div class="rail-bottom"><div class="mini-keyboard" aria-hidden="true"></div><p>每天 10 分鐘<br>先穩定拍子，再增加速度。</p><button class="text-button" id="help-open">使用說明 ↗</button></div>
+      <div class="rail-bottom"><div class="mini-keyboard" aria-hidden="true"></div><button class="text-button" id="help-open">使用說明 ↗</button></div>
     </aside>
     <main>
       <section id="practice-view">
-        <div class="heading-row"><div><h1 id="mode-title">讓雙手，落在同一拍。</h1><p id="mode-description" hidden></p></div><button class="quiet-button" id="quick-help">使用說明</button></div>
+        <div class="heading-row"><div><h1 id="mode-title">雙手節奏</h1><p id="mode-description" hidden></p></div><button class="quiet-button" id="quick-help">使用說明</button></div>
         <div class="workspace">
           <div class="music-column">
             <section class="score-panel" aria-label="練習樂譜">
-              <div class="score-toolbar"><div class="exercise-meta"><span id="exercise-number" class="tag">練習 1 / 2</span><span id="exercise-key">C 大調 · 4/4</span></div><label class="grade-label">程度 <select id="grade"><option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option></select></label></div>
-              <div class="score-heading"><div><h2 id="exercise-title"></h2></div><button id="next-exercise" class="quiet-button">換一份短譜 ↻</button></div>
+              <div class="score-toolbar"><div class="exercise-meta"><span id="exercise-number" class="tag">練習 1 / 2</span><span id="exercise-key">C 大調 · 4/4</span></div><div class="score-controls"><div class="transport-controls"><button id="start" class="primary-button"><span>▶</span> 開始練習</button><button id="stop" class="quiet-button" disabled>■ 停止</button><button id="demo" class="quiet-button">♫ 聽示範</button></div><div class="inline-tempo" role="group" aria-label="練習速度"><label><span id="tempo-unit">♩＝</span><input id="bpm-number" type="number" min="30" max="160" step="1" value="60" aria-label="速度 BPM"><span>BPM</span></label><button id="bpm-plus" aria-label="增加兩拍">＋</button><button id="bpm-minus" aria-label="減少兩拍">−</button></div><label class="grade-label">拍號 <select id="meter"><option value="4/4">4/4</option></select></label><label class="grade-label">程度 <select id="grade"><option value="2">Grade 2</option><option value="3">Grade 3</option><option value="4" selected>Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option></select></label></div></div>
+              <details class="fold-panel arrangement-panel"><summary>調性、和弦與風格</summary><div class="arrangement-options"><label>調性 <select id="key-choice"><option value="original">原調</option></select></label><label>音型 <select id="texture-choice"><option value="auto">依程度</option><option value="single">單音</option><option value="chords">含和弦</option></select></label><label>音樂風格 <select id="genre-choice"><option value="original">原譜</option><option value="baroque">Baroque 巴洛克</option><option value="classical">Classical 古典</option><option value="romantic">Romantic 浪漫</option><option value="jazz">Jazz／Blues 爵士／藍調</option></select></label><details class="character-options"><summary>進階設定</summary><label>演奏性格 <select id="style-choice"><option value="original">隨音樂風格</option><option value="singing">歌唱</option><option value="light">輕巧</option><option value="bold">雄健</option></select></label></details><small>原創風格練習；爵士／藍調使用直拍。</small></div></details><div class="top-play-status"><div class="beat-status"><div class="beats" aria-hidden="true"><i></i><i></i><i></i><i></i><i hidden></i></div><span id="play-status" role="status" aria-live="polite">待開始</span><span id="bar-position">4 小節 / 16 拍</span></div></div>
+              <div class="score-heading"><div><h2 id="exercise-title"></h2></div><div class="button-row"><button id="new-variation" class="quiet-button">變奏</button><button id="next-exercise" class="quiet-button">換一份短譜 ↻</button></div></div>
               <div class="legend compact-legend"><span><i class="dot" style="background:#216b68"></i>正在彈</span><span><i class="dot" style="background:#d8a03d"></i>預讀下一節</span></div>
               <div id="score-scroll" class="score-scroll"><div id="score" class="score"></div></div>
-              <div id="vertical-panel" class="vertical-panel" hidden><div><strong>先看這一列，兩手一起回答</strong><p id="column-question"></p><p id="column-answer" hidden></p></div><div class="button-row"><button class="quiet-button" id="reveal-column">顯示音名</button><button class="quiet-button" id="next-column">下一列 →</button></div></div>
-              <section id="expression-panel" class="expression-panel" hidden>
-                <div class="panel-heading"><h2>先找出表情路線</h2><label><input id="expression-coach" type="checkbox" checked> 提早一拍提醒</label></div>
-                <details><summary>怎樣預讀表情？</summary><p>先花 15 秒找開頭、變化和終點，說出路線，再核對。熟悉後關閉提醒。</p></details>
-                <button id="expression-reveal" class="quiet-button">核對表情路線</button>
-                <p id="expression-route" hidden></p>
-                <p id="expression-cue" role="status" aria-live="polite">先觀察譜上的記號，再開始。</p>
-                <details><summary>符號小字典</summary><p><i>p</i>：輕；<i>mf</i>：中強；<i>f</i>：強。張開的楔形：漸強；收窄的楔形：漸弱。音符旁的小圓點：斷奏；連接不同音高的弧線：連奏線。力度是相對的，不是固定音量。</p></details>
-              </section>
+              <div id="symbol-buttons" class="symbol-buttons" aria-label="點擊表情記號查看解釋" hidden></div>
+              <div id="vertical-panel" class="vertical-panel" hidden><div><p id="column-question"></p><p id="column-answer" hidden></p></div><div class="button-row"><button class="quiet-button" id="reveal-column">顯示音名</button><button class="quiet-button" id="next-column">下一列 →</button></div></div>
+              <p id="expression-cue" class="expression-cue" role="status" aria-live="polite"></p>
             </section>
             <div class="transport-panel">
-              <div class="beat-status"><div class="beats" aria-hidden="true"><i></i><i></i><i></i><i></i></div><span id="play-status" role="status" aria-live="polite">準備好了，就開始。</span><span id="bar-position">4 小節 / 16 拍</span></div>
-              <div class="transport-controls"><button id="start" class="primary-button"><span>▶</span> 開始練習</button><button id="stop" class="quiet-button" disabled>■ 停止</button><button id="demo" class="quiet-button">♫ 聽示範</button></div>
-              <div id="tap-panel" class="tap-panel"><div class="tap-intro"><strong>在桌上拍，或直接用雙手按鍵。</strong><span>空白鍵開始／停止 · 電腦鍵盤 F 左手、J 右手</span></div><div class="tap-buttons"><button id="tap-left" class="tap-button left"><kbd>F</kbd><span>左手拍</span><small id="left-hit">等待開始</small></button><button id="tap-right" class="tap-button right"><kbd>J</kbd><span>右手拍</span><small id="right-hit">等待開始</small></button></div><p id="tap-summary">按鍵只比對節奏時間，不會聆聽鋼琴或判斷音高。</p></div>
+
+
+              <div id="tap-panel" class="tap-panel"><div class="tap-intro"><span>空白鍵開始／停止 · 電腦鍵盤 F 左手、J 右手</span></div><div class="tap-buttons"><button id="tap-left" class="tap-button left"><kbd>F</kbd><span>左手拍</span><small id="left-hit">等待開始</small></button><button id="tap-right" class="tap-button right"><kbd>J</kbd><span>右手拍</span><small id="right-hit">等待開始</small></button></div><p id="tap-summary"></p></div>
             </div>
             <section class="reflection" id="reflection" hidden>
-              <div class="reflection-title"><h2>完成一遍，回想一下。</h2><span id="completion-detail"></span></div>
-              <p>以下由你自行評估；節奏按鍵結果會另行保留。</p>
-              <div class="reflection-fields"><label>音符／節奏準確度（%）<input id="accuracy" type="number" min="0" max="100" value="90"></label><label>停頓次數<input id="pauses" type="number" min="0" max="99" value="0"></label><label>雙手落鍵<select id="coordination"><option value="steady">穩定同步</option><option value="uneven">仍有先後</option></select></label></div>
-              <fieldset id="expression-review" class="expression-review" hidden><legend>表情完成度（自行評估）</legend><p>只勾選實際做到的項目；可錄音回聽後再判斷。</p><label><input id="expression-start" type="checkbox"> 開頭：有做到起始力度／奏法</label><label><input id="expression-change" type="checkbox"> 途中：有跟上力度／奏法變化</label><label><input id="expression-end" type="checkbox"> 結尾：有到達指定力度／奏法</label></fieldset>
-              <label class="note-field">一句筆記（選填）<input id="session-note" maxlength="160" placeholder="例如：第 3 小節左手換位時遲了"></label>
+              <div class="reflection-title"><h2>本次紀錄</h2><span id="completion-detail"></span></div>
+
+              <div class="reflection-fields"><label>準確度（%，自行評估）<input id="accuracy" type="number" min="0" max="100" value="90"></label><label>停頓次數<input id="pauses" type="number" min="0" max="99" value="0"></label><label>雙手落鍵<select id="coordination"><option value="steady">穩定同步</option><option value="uneven">仍有先後</option></select></label></div>
+              <fieldset id="expression-review" class="expression-review" hidden><legend>表情完成度（自行評估）</legend><label><input id="expression-start" type="checkbox"> 開頭：有做到起始力度／奏法</label><label><input id="expression-change" type="checkbox"> 途中：有跟上力度／奏法變化</label><label><input id="expression-end" type="checkbox"> 結尾：有到達指定力度／奏法</label></fieldset>
+              <label class="note-field">筆記（選填）<input id="session-note" maxlength="160" placeholder="例如：第 3 小節左手換位時遲了"></label>
               <div class="button-row"><button id="save-session" class="primary-button">儲存這次練習</button><button id="discard-session" class="text-button">略過紀錄</button></div>
             </section>
           </div>
           <aside class="practice-side">
-            <section class="tempo-panel"><div class="panel-heading"><h2>練習速度</h2></div><div class="tempo-readout"><button id="bpm-minus" aria-label="減少兩拍">−</button><label><input id="bpm-number" type="number" min="30" max="160" step="1" value="60" aria-label="BPM"><span>BPM</span></label><button id="bpm-plus" aria-label="增加兩拍">＋</button></div><input type="range" id="bpm-range" min="30" max="160" value="60" aria-label="調整練習 BPM"></section>
-            <section id="ladder-panel" class="ladder-panel" hidden><h2>你的速度階梯</h2><div class="ladder-settings"><label>目標 BPM<input id="ladder-target" type="number" value="80" min="30" max="160"></label><label>每級增加<select id="ladder-step"><option value="2">2 BPM</option><option value="4" selected>4 BPM</option><option value="6">6 BPM</option><option value="8">8 BPM</option></select></label></div><div id="ladder-rungs"></div><div id="ladder-streak" class="ladder-streak">本級達標 0 / 2 次</div><details><summary>升降速規則</summary><p>準確度 ≥90%、沒有停頓、雙手穩定，連續兩次即可升級。未達標則降一級；最低 30 BPM。</p></details><button id="reset-ladder" class="text-button">重設本級進度</button></section>
-            <details class="fold-panel"><summary>顯示與播放設定</summary><div class="settings-body"><label><input type="checkbox" id="guide" checked> 同步導線與播放游標</label><label><input type="checkbox" id="read-ahead-toggle" checked> 下一小節發光預讀</label><label><input type="checkbox" id="note-labels"> 顯示音名</label><label>示範聲部 <select id="demo-hands"><option value="both">雙手</option><option value="right">只聽右手</option><option value="left">只聽左手</option></select></label><label class="check-label"><input id="metronome" type="checkbox" checked> 節拍聲</label><p>青綠游標跟隨目前拍子，金色光暈提示下一小節的音符及表情。最後一小節取消預讀。</p></div></details>
+            <section id="ladder-panel" class="ladder-panel" hidden><h2>速度階梯</h2><div class="ladder-settings"><label>目標 BPM<input id="ladder-target" type="number" value="80" min="30" max="160"></label><label>每級增加<select id="ladder-step"><option value="2">2 BPM</option><option value="4" selected>4 BPM</option><option value="6">6 BPM</option><option value="8">8 BPM</option></select></label></div><div id="ladder-rungs"></div><div id="ladder-streak" class="ladder-streak">本級達標 0 / 2 次</div><details><summary>升降速規則</summary><p>準確度 ≥90%、沒有停頓、雙手穩定，連續兩次即可升級。未達標則降一級；最低 30 BPM。</p></details><button id="reset-ladder" class="text-button">重設本級進度</button></section>
+            <details class="fold-panel"><summary>顯示與播放設定</summary><div class="settings-body"><label><input id="expression-coach" type="checkbox" checked> 表情提早一拍提醒</label><label>游標步進 <select id="cursor-step"><option value="main" selected>跟隨主要拍</option><option value="1">四分音符</option><option value="0.5">八分音符細分</option><option value="2">二分音符</option></select></label><label><input type="checkbox" id="guide" checked> 同步導線與播放游標</label><label><input type="checkbox" id="read-ahead-toggle" checked> 下一小節發光預讀</label><label><input type="checkbox" id="note-labels"> 顯示音名</label><label>示範聲部 <select id="demo-hands"><option value="both">雙手</option><option value="right">只聽右手</option><option value="left">只聽左手</option></select></label><label class="check-label"><input id="metronome" type="checkbox" checked> 節拍聲</label></div></details>
             <details class="fold-panel method-panel"><summary>練習方法</summary><div class="settings-body"><h2 id="method-title"></h2><p id="exercise-preparation"></p><ol id="method-steps"></ol><div class="practice-note" id="practice-note"></div><p id="exercise-tip"></p></div></details>
           </aside>
         </div>
 
       </section>
       <section id="records-view" hidden>
-        <div class="heading-row"><div><h1>每一遍，都有跡可循。</h1><p>比較同一練習的速度與穩定度，找到最舒服的下一步。</p></div><button id="export-records" class="quiet-button">匯出 CSV</button></div>
+        <div class="heading-row"><div><h1>練習紀錄</h1></div><button id="export-records" class="quiet-button">匯出 CSV</button></div>
         <div class="record-stats"><div><span>已儲存練習</span><strong id="stat-count">0</strong></div><div><span>累積演奏分鐘</span><strong id="stat-minutes">0</strong></div><div><span>穩定達標最高 BPM</span><strong id="stat-bpm">—</strong></div></div>
         <div class="records-panel"><div class="panel-heading"><h2>練習日誌</h2><label>篩選 <select id="record-filter"><option value="all">全部練習</option><option value="expression">表情記號</option><option value="rhythm">雙手節奏</option><option value="vertical">垂直讀譜</option><option value="ladder">速度階梯</option></select></label></div><div id="records-list"></div></div>
-        <p class="storage-note">紀錄只儲存在目前瀏覽器，沒有跨裝置同步。清除瀏覽器資料可能令紀錄消失；可先匯出 CSV 備份。下載版和網頁版各自保留紀錄。</p>
+        <p class="storage-note">紀錄儲存於此瀏覽器，不會跨裝置同步；可匯出備份。</p>
         <button class="text-button danger" id="clear-records">清除全部紀錄</button>
       </section>
     </main>
   </div>
-  <dialog id="help-dialog"><button class="dialog-close" id="help-close" aria-label="關閉使用說明">×</button><span class="tag">開始之前</span><h2>把練習器放在鋼琴旁。</h2><p>適合 Grade 4–6 程度的原創簡化練習，並非 ABRSM 考試試題或評級標準。手機每行顯示兩小節，保留播放游標及下一小節預讀提示。</p><p>這是一個讀譜與節奏工具。毋須連接 MIDI，也不使用麥克風；鋼琴演奏的音準及雙手配合由你自行評估。</p><ol><li><strong>先用 2 分鐘拍節奏。</strong>選「雙手節奏」，用左右手拍桌，或用 F（左手）及 J（右手）鍵。譜中的休止符不拍，長音只在起音時拍一次。</li><li><strong>用 3 分鐘讀整列。</strong>選「垂直讀譜」，沿同一條直線看上下譜表，說出兩手的音，再同時落鍵。可逐列顯示音名核對；C4 是中央 C。</li><li><strong>用 5 分鐘練速度。</strong>在「速度階梯」選慢速；按開始，聽 4 拍預備拍後彈奏。連續兩次達標才升級，不追趕節拍。</li><li><strong>完成後記錄。</strong>填準確度、停頓次數及雙手穩定度。重複短譜是協調訓練；測試真正視奏時先換新譜，預讀 20–30 秒，首次演奏前不聽示範。</li></ol><p><strong>表情記號：</strong>新增三階段練習：固定力度、漸強漸弱、連奏與斷奏。先默讀記號路線，再核對；提示會提早一拍出現，可關閉。示範有相對音量與音長變化。長音按下後不能靠加力漸強；變化由後續起音表現。連奏／斷奏練習先不用踏板。</p><p>手機每行顯示兩小節；橫放或使用平板可放大閱讀空間。播放中會鎖定速度及題目；切換分頁會停止播放，以免節拍失準。</p><p>按鍵時間比對容許約 ±180 毫秒，只供節奏練習參考；裝置延遲會影響結果。示範使用合成琴音。</p><button class="primary-button" id="help-ready">開始練習</button></dialog>
+  <dialog id="help-dialog"><button class="dialog-close" id="help-close" aria-label="關閉使用說明">×</button><span class="tag">開始之前</span><h2>使用說明</h2><p>調性依所選程度的視奏範圍提供；換大／小調會按音階轉換旋律。含和弦：三級起加入雙音，三級至四級避免四聲部；五至六級每手最多兩音。音樂風格會重新編寫旋律、伴奏及節奏；爵士／藍調採直拍，五級起才加入切分。這些是簡化風格練習，並非完整考試模擬或官方風格分類。進階設定的演奏性格會覆蓋原有奏法，不自動更改 BPM。</p><p>表情範圍參照 <a href="https://www.abrsm.org/sites/default/files/2024-06/Piano%202025%20%26%202026%20Prac%20syllabus%2020240524_access.pdf" target="_blank" rel="noopener">ABRSM 2025–2026 鋼琴考綱，第 16 頁</a>，包括至六級累積的力度、奏法、延長、結尾漸慢與右踏板。本工具仍採四小節簡化練習，並非完整六級視奏模擬；官方六級約 12–16 小節。</p><p>青綠游標表示正在彈的位置；金色光暈提示下一小節的音符及表情記號。最後一小節不再預讀。</p><p>適合 Grade 2–6 程度的原創簡化練習，並非 ABRSM 考試試題或評級標準。手機每行顯示兩小節，保留播放游標及下一小節預讀提示。</p><p>這是一個讀譜與節奏工具。毋須連接 MIDI，也不使用麥克風；鋼琴演奏的音準及雙手配合由你自行評估。</p><ol><li><strong>先用 2 分鐘拍節奏。</strong>選「雙手節奏」，用左右手拍桌，或用 F（左手）及 J（右手）鍵。譜中的休止符不拍，長音只在起音時拍一次。</li><li><strong>用 3 分鐘讀整列。</strong>選「垂直讀譜」，沿同一條直線看上下譜表，說出兩手的音，再同時落鍵。可逐列顯示音名核對；C4 是中央 C。</li><li><strong>用 5 分鐘練速度。</strong>在「速度階梯」選慢速；按開始，聽 4 拍預備拍後彈奏。連續兩次達標才升級，不追趕節拍。</li><li><strong>完成後記錄。</strong>填準確度、停頓次數及雙手穩定度。重複短譜是協調訓練；測試真正視奏時先換新譜，預讀 20–30 秒，首次演奏前不聽示範。</li></ol><p><strong>表情記號：</strong>新增三階段練習：固定力度、漸強漸弱、連奏與斷奏。先默讀記號路線，再核對；提示會提早一拍出現，可關閉。示範有相對音量與音長變化。長音按下後不能靠加力漸強；變化由後續起音表現。連奏／斷奏練習先不用踏板。</p><p>手機每行顯示兩小節；橫放或使用平板可放大閱讀空間。播放中會鎖定速度及題目；切換分頁會停止播放，以免節拍失準。</p><p>按鍵時間比對容許約 ±180 毫秒，只供節奏練習參考；裝置延遲會影響結果。示範使用合成琴音。</p><button class="primary-button" id="help-ready">開始練習</button></dialog>
+  <dialog id="symbol-dialog" aria-labelledby="symbol-title"><button id="symbol-close" class="dialog-close" aria-label="關閉記號解釋">×</button><h2 id="symbol-title"></h2><p id="symbol-description"></p></dialog>
   <div id="toast" role="status" class="toast" hidden></div>
   <script src="exercises.js"></script>
+  <script src="meter.js"></script>
+  <script src="genres.js"></script>
+  <script src="arrangement.js"></script>
   <script src="notation.js"></script>
   <script src="app.js"></script>
 </body>

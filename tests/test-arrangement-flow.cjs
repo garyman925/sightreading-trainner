@@ -1,0 +1,9 @@
+const fs=require('fs'),assert=require('assert/strict');let harness=fs.readFileSync(require('path').join(__dirname,'test-flow.cjs'),'utf8').split('(async()=>{')[0].replace('return {els,doc,nav,clocks','return {w,els,doc,nav,clocks');const setup=new Function('require','__dirname',harness+'\nreturn setup;')(require,__dirname);
+(async()=>{
+ const a=setup(),e=a.els;e.grade.value='6';await e.grade.fire('change');e['key-choice'].value='C#m';await e['key-choice'].fire('change');e['texture-choice'].value='chords';await e['texture-choice'].fire('change');e['style-choice'].value='light';await e['style-choice'].fire('change');
+ assert.match(e['exercise-key'].textContent,/C♯ 小調/);assert.match(e['exercise-key'].textContent,/含和弦/);assert.equal(e['style-choice'].value,'light');assert.equal((e.score.innerHTML.match(/class="key-signature"/g)||[]).length,8);
+ await a.click('start');for(const id of ['key-choice','texture-choice','style-choice'])assert.equal(e[id].disabled,true);a.finish();await a.click('save-session');await a.mode('records');assert.match(e['records-list'].innerHTML,/C♯ 小調/);await a.click('export-records');const csv=await a.getBlob().text();assert.match(csv,/C#m/);assert.match(csv,/chords/);assert.match(csv,/light/);
+ await a.mode('rhythm');await a.click('new-variation');assert.match(e['exercise-key'].textContent,/C♯ 小調/);await a.click('next-exercise');assert.match(e['exercise-key'].textContent,/C♯ 小調/);
+ e.grade.value='2';await e.grade.fire('change');assert.equal(e['key-choice'].value,'original');assert.equal(e['texture-choice'].value,'single');assert.ok(!e['texture-choice'].innerHTML.includes('value="chords"'));
+ console.log('PASS: key/texture/style UI, correct sharps, playback locks, stored/CSV metadata, preserved options on variation/change, and lower-grade reset.');
+})().catch(e=>{console.error(e);process.exitCode=1;});
