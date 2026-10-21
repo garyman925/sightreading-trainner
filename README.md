@@ -16,6 +16,10 @@
 - Baroque、Classical、Romantic、Jazz／Blues 風格，實際改變旋律、伴奏與節奏；爵士／藍調使用直拍。
 - 演奏性格收於進階設定；手機每行兩小節，表情記號可點擊查看解釋。
 
+## 手機／網頁版
+
+直接開啟 https://garyman925.github.io/sightreading-trainner/ 。GitHub Pages 會在 main 分支更新後自動部署，網站入口導向 dist/。
+
 ## 啟動
 
 需要 Node.js 18 或以上，毋須安裝套件：
@@ -48,3 +52,4 @@ npm test
 這是無需建置的靜態網站，將 `dist/` 設為網站根目錄即可。儲存庫不包含原有 Sites 專案身分、憑證或個人練習紀錄。
 
 首次部署或更換網址會使用新的瀏覽器儲存區；請先在舊版本匯出 CSV 備份。
+
