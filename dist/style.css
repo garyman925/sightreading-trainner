@@ -42,3 +42,6 @@
 .arrangement-panel{margin:8px 12px}.arrangement-options{display:flex;flex-wrap:wrap;gap:10px 18px;padding:0 12px 12px;font-size:12px}.arrangement-options label{display:flex;align-items:center;gap:6px}.arrangement-options select{min-height:38px}.arrangement-options small{flex-basis:100%;font-size:10px;color:var(--muted)}
 
 .character-options{flex-basis:100%;font-size:11px}.character-options summary{cursor:pointer;color:var(--muted);padding:5px 0}.character-options label{margin-top:7px}.arrangement-options #genre-choice{max-width:100%}
+
+/* Keep grade and musical style together, including on narrow screens. */
+.level-genre-controls{display:grid;grid-template-columns:100px minmax(0,190px);gap:8px;max-width:100%}.level-genre-controls .grade-label{display:flex;flex-direction:column;align-items:stretch;gap:3px;font-size:11px}.level-genre-controls select{width:100%;min-width:0;min-height:40px;font-size:12px}.level-genre-controls .genre-label{white-space:nowrap}@media(max-width:620px){.level-genre-controls{width:100%;grid-template-columns:minmax(85px,1fr) minmax(0,1.7fr)}.level-genre-controls select{font-size:13px}}
